@@ -41,8 +41,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 connectDB();
 
-console.log("Base de datos:", process.env.MONGO_URI);
-console.log("Puerto:", process.env.PORT);
+
 
 app.use('/', indexRouter);
 app.use("/pacientes", pacienteRoutes);
