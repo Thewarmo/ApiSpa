@@ -29,11 +29,15 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 // Security middleware
 app.use(helmet()); // Adds various HTTP headers
 app.use(cors({
-    origin: 'http://localhost:3000', // Replace with your frontend URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+  origin: ['http://localhost:4500', 'https://apispa.onrender.com'], // Añade tu dominio de Render
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use('/auth', authRoutes);
+// Añade esto antes de module.exports = app;
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
 
 
 
