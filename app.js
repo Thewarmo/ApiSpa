@@ -49,22 +49,8 @@ app.use("/citas", citaRoutes);
 app.use("/procedimientos", procedimientoRoutes);
 
 const PORT = process.env.PORT || 3000;
-const server = app.listen(PORT, '0.0.0.0', (err) => {
-  if (err) {
-    console.error('Error starting server:', err);
-    process.exit(1);
-  }
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
-}).on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.error(`Puerto ${PORT} está en uso. Intentando otro puerto...`);
-    server.close();
-    app.listen(0, '0.0.0.0', () => {
-      console.log(`Servidor corriendo en el puerto ${server.address().port}`);
-    });
-  } else {
-    console.error('Error:', err);
-  }
 });
 
 module.exports = app;
