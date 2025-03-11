@@ -65,9 +65,9 @@ router.use(apiLimiter);
  *       400:
  *         description: Invalid input
  */
-router.get("/pacientes/", getPacientes);
+router.get("/", getPacientes);
 
 
-router.post("/pacientes/crear", verifyToken,createPaciente);
+router.post("/crear", verifyToken,createPaciente);
 
 module.exports = router;

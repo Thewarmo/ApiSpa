@@ -3,6 +3,7 @@ const Paciente = require("../models/pacienteModel");
 const getPacientes = async (req, res) => {
   try {
     const pacientes = await Paciente.find();
+    console.log(pacientes);
     res.json(pacientes);
   } catch (error) {
     res.status(500).json({ error: "Error al obtener usuarios" });
