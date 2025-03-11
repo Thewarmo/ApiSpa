@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const rateLimit = require('express-rate-limit');
 const verifyToken = require('../src/middleware/auth');
-const { getPacientes, createPaciente } = require("../src/controllers/pacienteController");
+const { getPacientes,createPaciente,updatePaciente,getPacientesNombres } = require("../src/controllers/pacienteController");
 
 
 const apiLimiter = rateLimit({
@@ -66,8 +66,8 @@ router.use(apiLimiter);
  *         description: Invalid input
  */
 router.get("/", getPacientes);
-
-
 router.post("/crear", verifyToken,createPaciente);
+router.get("/datosNombres", verifyToken,getPacientesNombres);
+router.post("/modificar", verifyToken,updatePaciente);
 
 module.exports = router;
