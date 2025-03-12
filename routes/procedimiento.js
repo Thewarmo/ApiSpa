@@ -6,7 +6,8 @@ const {
     getProcedimientos, 
     crearProcedimiento, 
     updateProcedimiento, 
-    deleteProcedimiento 
+    deleteProcedimiento ,
+    getProcedimientosId
 } = require("../src/controllers/procedimientoController");
 
 
@@ -81,6 +82,14 @@ router.put("/modificar/:id", verifyToken, updateProcedimiento);
  */
 router.delete("/eliminar/:id", verifyToken, deleteProcedimiento);
 
+/**
+ * @swagger
+ * /procedimientos/listaProcedimientos:
+ *   get:
+ *     summary: get the list and id of procedures
+ *     tags: [ProcedimientosId]
+ */
+router.get("/listaProcedimientos", verifyToken,getProcedimientosId);
 
 
 module.exports = router;

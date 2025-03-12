@@ -59,9 +59,20 @@ const deleteProcedimiento = async (req, res) => {
     }
 };
 
+
+const getProcedimientosId = async (req, res) => {
+    try {
+        const procedimientos = await Procedimiento.find().select('_id nombre');
+        res.json(procedimientos);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports = {
     getProcedimientos,
     crearProcedimiento,
     updateProcedimiento,
-    deleteProcedimiento
+    deleteProcedimiento,
+    getProcedimientosId
 };
