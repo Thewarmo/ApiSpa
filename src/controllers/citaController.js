@@ -64,9 +64,46 @@ const deleteCita = async (req, res) => {
     }
 };
 
+const getCitasSelect = async (req, res) => {
+    try {
+        const citas = await Cita.find()
+            .select('_id fecha hora motivo estado pacienteId')
+            .populate({
+                path: 'pacienteId',
+                model: 'Paciente',
+                select: 'nombre documento'
+            })
+            .populate({
+                path: 'procedimientoId',
+                model: 'Procedimiento',
+                select: 'nombre'
+            });
+
+        const citasFormateadas = citas.map(cita => ({
+            _id: cita._id,
+            descripcion: `${cita.pacienteId?.nombre || 'Sin paciente'} - ${cita.procedimientoId?.nombre || 'Sin procedimiento'} - ${cita.fecha.toLocaleDateString('es-ES')} ${cita.hora} - ${cita.estado}`,
+            fecha: cita.fecha,
+            hora: cita.hora,
+            estado: cita.estado,
+            motivo: cita.motivo,
+            paciente: cita.pacienteId,
+            procedimiento: cita.procedimientoId
+        }));
+
+        res.json(citasFormateadas);
+    } catch (error) {
+        res.status(500).json({ 
+            message: error.message,
+            error: 'Error al obtener las citas'
+        });
+    }
+};
+
+
 module.exports = {
     getCitas,
     crearCita,
     updateCita,
-    deleteCita
+    deleteCita,
+    getCitasSelect 
 };

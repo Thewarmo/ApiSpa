@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const rateLimit = require('express-rate-limit');
 const verifyToken = require('../src/middleware/auth');
-const { getCitas, crearCita, updateCita, deleteCita } = require("../src/controllers/citaController");
+const { getCitas, crearCita, updateCita, deleteCita,getCitasSelect } = require("../src/controllers/citaController");
 
 const apiLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -107,5 +107,6 @@ router.get("/", getCitas);
 router.post("/crear", verifyToken,crearCita);
 router.put("/cambiarCita/:id", verifyToken, updateCita);
 router.delete("/eliminarCita/:id", verifyToken, deleteCita);
+router.get("/listaCita", verifyToken, getCitasSelect);
 
 module.exports = router;
