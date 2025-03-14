@@ -15,6 +15,7 @@ var indexRouter = require('./routes/index');
 const pacienteRoutes = require("./routes/paciente");
 const citaRoutes = require("./routes/cita");
 const procedimientoRoutes = require("./routes/procedimiento");
+const insumoRoutes = require("./routes/insumo");
 
 
 var app = express();
@@ -51,6 +52,7 @@ app.use('/', indexRouter);
 app.use("/pacientes", pacienteRoutes);
 app.use("/citas", citaRoutes);
 app.use("/procedimientos", procedimientoRoutes);
+app.use("/insumos", insumoRoutes);
 
 
 
