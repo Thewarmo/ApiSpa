@@ -30,7 +30,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 // Security middleware
 app.use(helmet()); // Adds various HTTP headers
 app.use(cors({
-  origin: ['http://localhost:4500', 'https://apispa.onrender.com'], // Añade tu dominio de Render
+  origin: '*',  // 🔥 Permitir cualquier origen temporalmente
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
